@@ -15,4 +15,24 @@ api = tweepy.API(auth) #allows us to use the API
 
 ##Let's begin the bot
 
-api.update_status('Testing automated python twitter bot')
+#api.update_status('Testing automated python twitter bot')
+
+for tweet in tweepy.Cursor(api.search,q='#rowanuniversity', lang='en').items():
+    try:
+        #tweepy.Cursor(api.followers, id = )
+        print("Found tweet by: @"+ tweet.user.screen_name)
+        print("Found tweet by user_id: "+ str(tweet.user.id))
+        #follower_list = tweet.user.get_followers_ids(tweet.user.screen_name)
+#        for i in range (len(follower_list)):
+#            str(follower_list[i])
+
+        print("Saying: '" + tweet.text+"'")
+        print(api.get_user())
+    except tweepy.TweepError as e:
+        print (e.reason)
+        sleep(10)
+        continue
+    except StopIteration:
+        break
+
+print(api.me())
