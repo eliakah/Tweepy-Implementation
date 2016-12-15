@@ -22,13 +22,13 @@ for tweet in tweepy.Cursor(api.search,q='#rowanuniversity', lang='en').items():
         print("Found tweet by: @"+ tweet.user.screen_name)
         print("Found tweet by user_id: "+ str(tweet.user.id))
         print("User Location: "+ str(tweet.user.location))
-        print("Saying: '" + tweet.text+"'")
+        print("Saying: '" + tweet.text+"'\n")
 
-        ids = []
-        for page in tweepy.Cursor(api.followers_ids, screen_name=tweet.user.screen_name).pages():
-            ids.extend(page)
+        #ids = []
+      #  for page in tweepy.Cursor(api.followers_ids, screen_name=tweet.user.screen_name).pages():
+           # ids.extend(page)
 
-        print("User has "+ str(len(ids)) + " followers \n")
+        #print("User has "+ str(len(ids)) + " followers \n")
 
     except tweepy.TweepError as e:
         print (e.reason)
