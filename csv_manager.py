@@ -2,28 +2,32 @@
 # csv manager.
 # This class runs all of the modules in the right sequential
 # order depending on the input
-
-import csv
+import sys
 
 #def main():
 
 class csv_manager:
-    #constructor, r = read, w = write
-    def __init__(self, path, flag, fieldnames):
+    #constructor
+    def __init__(self, fileName,extension,  fieldnames):
         self.fieldnames = fieldnames
-        if flag == 'r':
-            with open('names.csv') as csvfile:
-                self.reader = csv.DictReader(csvfile)
-            for row in self.reader:
-                for i in len(fieldnames):
-                    print(row[fieldnames[i]] + " ,")
+        self.extension = extension
+        self.fileName = fileName
+        self.name = self.fileName + "." + self.extension
 
-        if flag == 'w':
-            self.path = path
-            with open(path, 'w') as csvfile:
-                #fieldnames = ['first_name', 'last_name']
-                self.writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-                self.writer.writeheader()
-    #this adds
-    def addRow(self, row, fieldvalues):
+    #create file
+    def createFile(self):
+        try:
+
+            file = open(self.name, 'a')
+            file.write(self.fieldnames)
+            file.close()
+        except:
+            print("error occured")
+            sys.exit(0)
+
+    #adding a row to the file
+    def add_row(self, row):
+        with open(self.name, "a") as file:
+            file.write(row)
+        file.close()
 
